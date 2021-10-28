@@ -6,15 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./goals.component.css']
 })
 export class GoalsComponent {
-
-  /*
-  implements OnInit
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-*/
-
+  value = ' ';
 }
 
 
