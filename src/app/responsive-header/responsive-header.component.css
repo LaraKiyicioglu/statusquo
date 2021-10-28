@@ -5,6 +5,7 @@
 
 .sidenav .mat-toolbar {
   background: inherit;
+  background-color: #E8E4E1;
 }
 
 .mat-toolbar.mat-primary {
@@ -46,13 +47,13 @@
   padding: 20px;
   display: flex;
   cursor: pointer;
-
 }
 
 .element-text{
   padding-top:5px;
   font-size: 16px;
 }
+
 .random-user{
   width:40px;
   height:40px;
@@ -77,7 +78,7 @@
 }
 
 .title{
-  cursor:pointer
+  cursor:pointer;
 }
 
 img{
@@ -87,7 +88,6 @@ img{
 .rollen-verteilung{
   font-size: 16px;
   margin-top: 10px;
-
 }
 
 .rolle-bild{
@@ -98,6 +98,7 @@ img{
   margin-left: 5px;
 }
 
-
-
+.mat-toolbar {
+  background-color: #E8E4E1 !important;
+}
 

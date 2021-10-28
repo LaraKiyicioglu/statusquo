@@ -5,7 +5,7 @@
   margin-top: 1%;
   box-shadow: 0px 0px 8px #E8E4E1;
   font-family: "Klavika", sans-serif;
-  color: #857971;
+  color: #0071B9;
 }
 
 .style2 {
@@ -20,4 +20,25 @@
   border-radius: 3px;
 }
 
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #0071B9 !important;
+}
 
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #0071B9 !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #0071B9 !important;
+}
+
+input {
+  color: #857971 !important;
+}
+
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #E8E4E1 !important;
+}
