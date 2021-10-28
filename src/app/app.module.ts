@@ -21,6 +21,8 @@ import { ResponsiveHeaderComponent } from './responsive-header/responsive-header
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { GoalsComponent } from './goals/goals.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 
@@ -32,6 +34,7 @@ import { MatListModule } from '@angular/material/list';
   declarations: [
     AppComponent,
     ResponsiveHeaderComponent,
+    GoalsComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     LayoutModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
     // MatListModule
   ],
   providers: [],
