@@ -17,7 +17,9 @@
 .example-form-field {
   width: 100%;
   margin-top: 5%;
-  border-radius: 3px;
+  background-color: #E8E4E1;
+  padding-bottom: -20px;
+  border-radius: 4px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
@@ -41,4 +43,12 @@ input {
 
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: #E8E4E1 !important;
+}
+
+::ng-deep.mat-form-field-wrapper {
+  margin-bottom: -100% !important;
+}
+
+::ng-deep.mat-form-field-flex {
+  border-radius: 4px !important;
 }
