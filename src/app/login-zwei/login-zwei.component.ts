@@ -2,6 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import {Goals} from "../shared/goals";
+import {Login} from "../shared/login";
+import {ApiService} from "../shared/api.service";
 
 @Component({
   selector: 'app-login-zwei',
@@ -16,12 +19,16 @@ export class LoginZweiComponent implements OnInit {
   private formSubmitAttempt = false;
   private returnUrl: string;
   public loggedIn = false;
-
+  data: Login[] = [];
+  isLoadingResults = true;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private api: ApiService,
+
+
   ) {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
 
@@ -32,11 +39,25 @@ export class LoginZweiComponent implements OnInit {
     });
   }
 
-  async ngOnInit(): Promise<void> {
+  /*async ngOnInit(): Promise<void> {
     if (await this.authService.checkAuthenticated()) {
       await this.router.navigate([this.returnUrl]);
     }
+  }*/
+
+  ngOnInit() {
+    this.api.getUsers()
+      .subscribe((res: any) => {
+        this.data = res;
+        console.log(this.data)
+        console.log(this.data);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
+
 
   async onSubmit(): Promise<void> {
 

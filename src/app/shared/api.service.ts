@@ -3,13 +3,14 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Goals} from "./goals";
-
+import { Login} from "./login";
 
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 const apiUrl = 'http://localhost:3000/goals';
+const apiUrlLogin = 'http://localhost:3000/users';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,14 @@ export class ApiService {
       .pipe(
         tap(goal => console.log('fetched articles')),
         catchError(this.handleError('getGoals', []))
+      );
+  }
+
+  getUsers(): Observable<Login[]> {
+    return this.http.get<Login[]>(apiUrlLogin)
+      .pipe(
+        tap(goal => console.log('fetched Users')),
+        catchError(this.handleError('getUsers', []))
       );
   }
 

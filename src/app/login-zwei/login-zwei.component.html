@@ -21,3 +21,5 @@
     </form>
   </mat-card-content>
 </mat-card>
+<mat-card class="style3 example-box" *ngFor="let user of data" cdkDrag>
+  {{ user.email }},  {{ user.username }}</mat-card>
