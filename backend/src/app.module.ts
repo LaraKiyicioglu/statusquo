@@ -1,10 +1,10 @@
-import {Module} from '@nestjs/common';
-import {AppController} from './app.controller';
-import {AppService} from './app.service';
-import {GoalsModule} from "./goals/goals.module";
-import {MongooseModule} from "@nestjs/mongoose";
-import {UsersModule} from './users/users.module';
-import {AuthModule} from './auth/auth.module';
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { GoalsModule } from './goals/goals.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,5 +18,4 @@ import {AuthModule} from './auth/auth.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -1,17 +1,18 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
-import {InjectModel} from "@nestjs/mongoose";
-import {Model} from 'mongoose';
-import {Users} from "./users.model";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Users } from './users.model';
 
 @Injectable()
 export class UsersService {
   private users: Users[] = [];
 
-  constructor(@InjectModel('Users') private readonly usersModel: Model<Users>) {
-  }
+  constructor(
+    @InjectModel('Users') private readonly usersModel: Model<Users>,
+  ) {}
 
   async findOne(username: string): Promise<Users | undefined> {
-    return (await this.getUsers()).find(user => user.username === username);
+    return (await this.getUsers()).find((user) => user.username === username);
   }
 
   private async findUser(id: string): Promise<Users> {
@@ -36,18 +37,25 @@ export class UsersService {
       firstname: users.firstname,
       surname: users.surname,
       email: users.email,
-      role: users.role
+      role: users.role,
     };
   }
 
-  async insertUsers(username: string, password: string, firstname: string, surname: string, email: string, role: string) {
+  async insertUsers(
+    username: string,
+    password: string,
+    firstname: string,
+    surname: string,
+    email: string,
+    role: string,
+  ) {
     const newUser = new this.usersModel({
       username: username,
       password: password,
       firstname: firstname,
       surname: surname,
       email: email,
-      role: role
+      role: role,
     });
     const result = await newUser.save();
     return result.id;
@@ -65,7 +73,7 @@ export class UsersService {
     firstname: string,
     surname: string,
     email: string,
-    role: string
+    role: string,
   ) {
     const updatedUsers = await this.findUser(userId);
     if (username) {
@@ -90,7 +98,7 @@ export class UsersService {
   }
 
   async deleteUsers(usersId: string) {
-    const result = await this.usersModel.deleteOne({_id: usersId}).exec();
+    const result = await this.usersModel.deleteOne({ _id: usersId }).exec();
     console.log(result);
   }
 }

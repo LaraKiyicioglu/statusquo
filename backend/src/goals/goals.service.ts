@@ -1,19 +1,17 @@
-import {Goal} from "./goals.model";
-import {InjectModel} from "@nestjs/mongoose";
-import {Model} from "mongoose";
-import {Injectable, NotFoundException} from "@nestjs/common";
+import { Goal } from './goals.model';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class GoalsService {
   private goals: Goal[] = [];
 
-  constructor(@InjectModel('Goal') private readonly goalModel: Model<Goal>
-  ) {
-  }
+  constructor(@InjectModel('Goal') private readonly goalModel: Model<Goal>) {}
 
   async insertGoals(desc: string) {
     const newGoal = new this.goalModel({
-      description: desc
+      description: desc,
     });
     const result = await newGoal.save();
     return result.id as string;
@@ -21,18 +19,18 @@ export class GoalsService {
 
   async getGoals() {
     const goals = await this.goalModel.find().exec();
-    return goals.map((goal) => ({id: goal.id, description: goal.description}));
+    return goals.map((goal) => ({
+      id: goal.id,
+      description: goal.description,
+    }));
   }
 
   async getSingleGoal(goalId: string) {
     const goal = await this.findGoal(goalId);
-    return {id: goal.id, description: goal.description};
+    return { id: goal.id, description: goal.description };
   }
 
-  async updateGoal(
-    goalId: string,
-    desc: string
-  ) {
+  async updateGoal(goalId: string, desc: string) {
     const updatedGoal = await this.findGoal(goalId);
     if (desc) {
       updatedGoal.description = desc;
@@ -41,7 +39,7 @@ export class GoalsService {
   }
 
   async deleteGoal(goalId: string) {
-    const result = await this.goalModel.deleteOne({_id: goalId}).exec();
+    const result = await this.goalModel.deleteOne({ _id: goalId }).exec();
     console.log(result);
   }
 

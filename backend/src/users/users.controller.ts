@@ -1,10 +1,17 @@
-import {UsersService} from "./users.service";
-import {Body, Controller, Delete, Get, Param, Patch, Post,} from "@nestjs/common";
+import { UsersService } from './users.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {
-  }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
   async addUsers(
@@ -21,9 +28,9 @@ export class UsersController {
       usersFirstname,
       usersSurname,
       usersEmail,
-      usersRole
+      usersRole,
     );
-    return {id: generatedId};
+    return { id: generatedId };
   }
 
   @Get()
@@ -33,7 +40,7 @@ export class UsersController {
   }
 
   @Get(':id')
-  getUsers(@Param('id') usersId: string,) {
+  getUsers(@Param('id') usersId: string) {
     return this.usersService.getSingleUser(usersId);
   }
 
@@ -45,9 +52,17 @@ export class UsersController {
     @Body('firstname') usersFirstname: string,
     @Body('surname') usersSurname: string,
     @Body('email') usersEmail: string,
-    @Body('role') usersRole: string
+    @Body('role') usersRole: string,
   ) {
-    await this.usersService.updateUsers(usersId, usersUsername, usersPassword, usersFirstname, usersSurname, usersEmail, usersRole);
+    await this.usersService.updateUsers(
+      usersId,
+      usersUsername,
+      usersPassword,
+      usersFirstname,
+      usersSurname,
+      usersEmail,
+      usersRole,
+    );
     return null;
   }
 

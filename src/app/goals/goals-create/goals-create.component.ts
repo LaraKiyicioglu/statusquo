@@ -67,7 +67,7 @@ export class GoalsCreateComponent implements OnInit{
         console.log(err);
         this.isLoadingResults = false;
       });
-    this.getGoalDetails(this.route.snapshot.params.id);
+    this.getGoalDetails(this.route.snapshot.params.id);   //route stimmt hier nicht? id wird nicht übergeben--> undefined
   }
 
   getGoalDetails(id: any) {

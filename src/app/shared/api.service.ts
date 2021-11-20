@@ -87,10 +87,4 @@ export class ApiService {
       catchError(this.handleError<Goals>(`getArticle id=${id}`))
     );
   }
-
-
-
-
-
-
 }
