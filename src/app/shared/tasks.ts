@@ -1,5 +1,5 @@
 export interface Tasks {
-  id: string;
+  _id: string;
   description: string;
   status: string;
   goalid: string;

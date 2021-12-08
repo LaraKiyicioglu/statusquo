@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tasks} from "../shared/tasks";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
-import {Goals} from "../shared/goals";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../shared/api.service";
@@ -18,7 +17,7 @@ export class TodoComponent implements OnInit {
   @Input() tasksToDone: Tasks[] = [];
 
 
-  task: Tasks = { goalid: '', id: '', description: '', status: ''};
+  task: Tasks = { goalid: '', _id: '', description: '', status: ''};
   description = '';
 
   status = '';
@@ -33,9 +32,9 @@ export class TodoComponent implements OnInit {
 
   public changeStatus(): void {
         this.tasksToDoing.forEach((task: Tasks) => {
-          console.log(task);
+          console.log(task._id);
           task.status = String('doing');
-          this.api.updateTaskStatus(task, task).subscribe((task: Tasks) => {
+          this.api.updateTaskStatus(task._id, task).subscribe((task: Tasks) => {
           }, error => {
             console.log('hat nicht funktioniert');
           });

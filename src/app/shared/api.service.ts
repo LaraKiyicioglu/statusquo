@@ -114,7 +114,7 @@ export class ApiService {
 
   addTask(task: Tasks): Observable<Tasks> {
     return this.http.post<Tasks>(apiUrlTasks, task, httpOptions).pipe(
-      tap((task: Tasks) => console.log(`added task w/ id=${task.id}`)),
+      tap((task: Tasks) => console.log(`added task w/ id=${task._id}`)),
       catchError(this.handleError<Tasks>('addTask'))
     );
   }

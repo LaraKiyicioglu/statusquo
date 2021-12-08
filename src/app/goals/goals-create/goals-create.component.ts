@@ -33,7 +33,7 @@ export class GoalsCreateComponent implements OnInit{
   description = '';
   id = '';
   dataTasks: Tasks[] = [];
- tasksToOneGoal: Tasks[] = [];
+  tasksToOneGoal: Tasks[] = [];
 
  @Output() showTasksClicked = new EventEmitter<Tasks[]>();
 
