@@ -9,8 +9,8 @@
              [cdkDropListData]="data"
              class="example-list"
              (cdkDropListDropped)="drop($event)">
-      <mat-card class="small-card example-box" *ngFor="let goal of data" cdkDrag>
-        {{ goal.description }}
+      <mat-card class="small-card example-box"  (click)="showTasks(goal.id)" *ngFor="let goal of data" cdkDrag>
+        <p>{{ goal.description }}</p>
         <button [disableRipple]="true" class="button-styling" *ngIf="true" matSuffix mat-icon-button aria-label="Delete" (click)="deleteDialog(goal.id)">
           <mat-icon class="icon-styling"  (click)="deleteDialog(goal.id)">delete</mat-icon>
         </button>
@@ -23,13 +23,6 @@
           <span class="icon-styling">Add a Task</span>
 
         </button>
-
-
-
-
-        <button class="button-at button-styling" style="vertical-align:middle" (click)="showTasks(goal.id)">
-          <span>show Tasks </span></button>
-
 
 
         <!--   Progress bar: value = anz abgehakte todos jedes Ziels -->

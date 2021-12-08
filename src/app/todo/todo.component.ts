@@ -1,6 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tasks} from "../shared/tasks";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {Goals} from "../shared/goals";
+import {MatDialog} from "@angular/material/dialog";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ApiService} from "../shared/api.service";
 
 @Component({
   selector: 'app-todo',
@@ -13,17 +17,36 @@ export class TodoComponent implements OnInit {
   @Input() tasksToDoing: Tasks[] = [];
   @Input() tasksToDone: Tasks[] = [];
 
+
+  task: Tasks = { goalid: '', id: '', description: '', status: ''};
+  description = '';
+
+  status = '';
+
   showData: boolean = false;
 
-  constructor() { }
+  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
 
   }
 
+  public changeStatus(): void {
+        this.tasksToDoing.forEach((task: Tasks) => {
+          console.log(task);
+          task.status = String('doing');
+          this.api.updateTaskStatus(task, task).subscribe((task: Tasks) => {
+          }, error => {
+            console.log('hat nicht funktioniert');
+          });
+      });
+  }
+
+
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log('moveIteminArray aufgerufen');
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -31,6 +54,11 @@ export class TodoComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+
+      console.log('transferArrayItem aufgerufen');
+      this.changeStatus();
     }
   }
+
+
 }

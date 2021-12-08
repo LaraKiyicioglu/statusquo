@@ -101,7 +101,6 @@ export class GoalsCreateComponent implements OnInit{
     this.api.getGoals()
       .subscribe((res: any) => {
         this.data = res;
-        console.log(this.data)
         console.log(this.data);
         this.isLoadingResults = false;
 
@@ -171,7 +170,7 @@ export class GoalsCreateComponent implements OnInit{
   }
 
   openDialog(id: any): void {
-    this.idDialog= id;
+    this.idDialog = id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '40%',
       data :{'id': this.idDialog, 'description': this.description}
@@ -191,12 +190,11 @@ export class GoalsCreateComponent implements OnInit{
 
 
   addTask(id: any){
-
     this.isLoadingResults = true;
     const simpleObject = {} as Tasks;
-    simpleObject.description = "New Task For" +  id ;
+    simpleObject.description = "Click to edit";
     simpleObject.status= "todo";
-    simpleObject.goalid=id;
+    simpleObject.goalid = id;
 
     this.api.addTask(simpleObject)
       .subscribe((res: any) => {
@@ -213,14 +211,11 @@ export class GoalsCreateComponent implements OnInit{
 
 
   showTasks(id: any){
-
-
     this.api.getTasksToGoal(id)
       .subscribe((res: any) => {
       this.tasksToOneGoal = res;
       this.showTasksClicked.emit(this.tasksToOneGoal);
-
-        this.isLoadingResults = false;
+      this.isLoadingResults = false;
 
     }, err => {
       console.log(err);

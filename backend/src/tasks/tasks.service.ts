@@ -23,7 +23,7 @@ export class TasksService{
   async getTasks(){
     const tasks = await this.taskModel.find().exec();
     return tasks.map((task) => (
-      {id:task.id, description: task.description, status: task.status, goalid: task.goalid}));
+      {id: task.id, description: task.description, status: task.status, goalid: task.goalid}));
   }
 
   async getSingleTask(taskId: string){
@@ -38,7 +38,6 @@ export class TasksService{
     const updatedTask = await this.findTask(taskId);
     if(description){
       updatedTask.description = description
-
     }
 
     if(status){
@@ -54,8 +53,16 @@ export class TasksService{
 
   }
 
+  async updateTaskStatus(taskId: string, status: string) {
+    const updatedTaskStatus = await this.findTask(taskId);
+    if (status) {
+      updatedTaskStatus.status = status;
+    }
+    updatedTaskStatus.save();
+  }
+
   async deleteTask(taskId: string){
-    const result = await this.taskModel.deleteOne({_id:taskId}).exec();
+    const result = await this.taskModel.deleteOne({id: taskId}).exec();
   }
 
   async getTasksToGoal(goalid: string){

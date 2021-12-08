@@ -13,6 +13,7 @@ const apiUrl = 'http://localhost:3000/goals';
 const apiUrlLogin = 'http://localhost:3000/users';
 const apiUrlOrder = 'http://localhost:3000/goals/order';
 const apiUrlTasks = 'http://localhost:3000/tasks';
+const apiUrlStatus = 'http://localhost:3000/tasks/status';
 const apiUrlTasksForGoal = 'http://localhost:3000/tasks/goal';
 
 
@@ -144,5 +145,12 @@ export class ApiService {
       );
   }
 
-
+  updateTaskStatus(id: any, task: Tasks): Observable<any> {
+    const url = `${apiUrlStatus}/${id}`;
+    console.log('api.service aufgerufen');
+    return this.http.patch(url, task, httpOptions).pipe(
+      tap(_ => console.log(`updated task status id=${id} und status=` + task.status)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
+  }
 }
