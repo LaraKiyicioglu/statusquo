@@ -1,24 +1,25 @@
 
 <mat-card class="container">
-  <div cdkDropListGroup>
+  <div *ngInit="fillArrays()"></div>
+  <div cdkDropListGroup style="display: flex">
     <div
       cdkDropList
       #todoList="cdkDropList"
       [cdkDropListData]="tasksToOneGoal"
       class="example-list"
-      (cdkDropListDropped)="drop($event)">
+      (cdkDropListDropped)="dropInTodo($event)">
 
       <mat-card class="main-card">TODO
-        <mat-card class="inner-card">
-          <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag>
+          <div  *ngFor="let task of tasksToOneGoal" cdkDrag>
+          <mat-card class="small-card" cdkDrag>
             {{ task.description }}
 
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
               <mat-icon class="icon-styling">delete</mat-icon>
             </button>
           </mat-card>
+          </div>
         </mat-card>
-      </mat-card>
     </div>
 
 
@@ -28,9 +29,8 @@
       #doingList="cdkDropList"
       [cdkDropListData]="tasksToDoing"
       class="example-list"
-      (cdkDropListDropped)="drop($event)">
+      (cdkDropListDropped)="dropInDoing($event)">
       <mat-card class="main-card">DOING
-        <mat-card class="inner-card">
          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
 
            {{task.description}}
@@ -40,7 +40,6 @@
            </button>
          </mat-card>
        </mat-card>
-      </mat-card>
     </div>
 
 
@@ -49,9 +48,8 @@
       #doneList="cdkDropList"
       [cdkDropListData]="tasksToDone"
       class="example-list"
-      (cdkDropListDropped)="drop($event)">
+      (cdkDropListDropped)="dropInDone($event)">
       <mat-card class="main-card">DONE
-        <mat-card class="inner-card">
           <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
 
             {{task.description}}
@@ -61,7 +59,6 @@
             </button>
           </mat-card>
         </mat-card>
-      </mat-card>
     </div>
   </div>
 </mat-card>
