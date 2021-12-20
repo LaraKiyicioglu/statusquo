@@ -13,8 +13,8 @@ import {ApiService} from "../shared/api.service";
 export class TodoComponent implements OnInit {
 
   @Input() tasksToOneGoal: Tasks[] = [];
-  @Input() tasksToDoing: Tasks[] = [];
-  @Input() tasksToDone: Tasks[] = [];
+  tasksToDoing: Tasks[] = [];
+  tasksToDone: Tasks[] = [];
 
 
   task: Tasks = { goalid: '', _id: '', description: '', status: ''};
@@ -27,9 +27,8 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-    fillArrays() {
-    console.log("vorher " + this.tasksToOneGoal);
-    console.log("Doing " + this.tasksToDoing);
+  fillArrays() {
+   console.log('aufruf');
     for(let task of this.tasksToOneGoal) {
       if (task.status == "doing") {
         let index = this.tasksToOneGoal.indexOf(task);
@@ -41,10 +40,11 @@ export class TodoComponent implements OnInit {
         this.tasksToDone.push(task);
       }
     }
-    console.log("nachher " + this.tasksToOneGoal);
-    console.log("Doing nachher " + this.tasksToDoing);
     this.ngOnInit();
   }
+
+
+
 
   /*TODO*/
 

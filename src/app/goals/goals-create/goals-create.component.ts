@@ -25,6 +25,9 @@ export class GoalsCreateComponent implements OnInit{
   enteredValue = '';
   newPost = '';
   idDialog: any = '';
+  counterDone: number = 0;
+  counterTodoDoing: number = 0;
+  counter: number = 0;
 
   displayedColumns: string[] = ['description'];
   data: Goals[] = [];
@@ -101,8 +104,9 @@ export class GoalsCreateComponent implements OnInit{
     this.api.getGoals()
       .subscribe((res: any) => {
         this.data = res;
-        console.log(this.data);
+        console.log('console log ____> ' + this.data);
         this.isLoadingResults = false;
+        this.progress(res.id);
 
         this.data.sort((goal1, goal2) => {
           return Number(goal1.order)- Number(goal2.order);
@@ -209,6 +213,21 @@ export class GoalsCreateComponent implements OnInit{
 
   }
 
+  progress(id: any) {
+    this.api.getTasksToGoal(id).subscribe((res: any) => {
+        this.tasksToOneGoal = res;
+      });
+    for(let task of this.tasksToOneGoal) {
+      console.log(task);
+      this.counter++;
+      if( task.status == 'done') {
+        this.counterDone++;
+      } else {
+        this.counterTodoDoing++;
+      }
+    }
+    this.counter
+  }
 
   showTasks(id: any){
     this.api.getTasksToGoal(id)
