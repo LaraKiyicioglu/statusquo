@@ -27,7 +27,7 @@
                name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
         <span class="example-accordion-item-description">
           <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
-      </span>
+        </span>
       </div>
       <div
         class="example-accordion-item-body"
@@ -46,26 +46,42 @@
 
 
 
-<!--
-<mat-card class="inner-cardGoals">
-  <mat-card-content class="content">
-    <div cdkDropList
-         #todoList="cdkDropList"
-         [cdkDropListData]="goalsToOneUser"
-         class="example-list"
-         (cdkDropListDropped)="drop($event)">
-      <mat-card (click)="setGoalsid(goal._id)"
-                [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }"
-                class="greyGoalsCard example-box" *ngFor="let goal of goalsToOneUser" cdkDrag
-                (click)="setTheSelectedGoal(goal)" (click)="showTasks(goal._id)">
-        <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
 
-        <input class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
-               ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals"
-               name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
 
-        <mat-progress-bar mode="determinate" [value]="this.progress"></mat-progress-bar>
+<!--DESKTOP-->
+<div class="main-div">
+  <mat-grid-list cols="5" rowHeight="100%">
+    <mat-grid-tile [colspan]="2">
+      <mat-card class="goalsCard-desktop">ZIELE
+        <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="onAddPost(idloggedInUser)">add</mat-icon>
+
+        <mat-card class="inner-cardGoals">
+            <div cdkDropList
+                 #todoList="cdkDropList"
+                 [cdkDropListData]="goalsToOneUser"
+                 class="example-list"
+                 (cdkDropListDropped)="drop($event)">
+              <mat-card (click)="setGoalsid(goal._id)"
+                        [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }"
+                        class="greyGoalsCard example-box" *ngFor="let goal of goalsToOneUser" cdkDrag
+                        (click)="setTheSelectedGoal(goal)" (click)="showTasks(goal._id)">
+                <span class="icon-desktop">
+                  <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+                </span>
+
+                <input class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                       ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals"
+                       name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
+
+              </mat-card>
+            </div>
+        </mat-card>
       </mat-card>
-    </div>
-  </mat-card-content>
-</mat-card>-->
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
+                [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"></app-todo>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

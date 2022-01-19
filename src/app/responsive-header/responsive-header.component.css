@@ -63,7 +63,7 @@
 .random-user-side-text {
   margin-top: 10px;
   margin-left: 10px;
-  color: grey;
+  color: #857971;
   font-size: 10px;
 }
 
@@ -98,6 +98,26 @@ img {
   background-color: transparent !important;
 }
 
+
 .members-styling {
   margin-left: 20%;
+}
+
+.expansion-panel-styling {
+  box-shadow: none !important;
+  margin-left: -12%;
+}
+
+.expansion-panel-member-styling {
+  margin-left: 12%;
+}
+
+mat-toolbar {
+  background-color: #E8E4E1;
+}
+
+@media screen and (min-width: 1080px) {
+  .icon-styling {
+    display: none !important;
+  }
 }

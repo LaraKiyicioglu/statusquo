@@ -1,11 +1,9 @@
-<p>die id ist {{selectedId}}</p>
+<p></p>
 <!--<app-goals [selectedRole]="selectedRole" [goalsToOneUser]="goalsToOneUser" [idMember]="selectedId"
            (showTasksClicked)="tasksToOneGoal = $event"
-         &lt;!&ndash;  (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event"
-           (showGoalid)="setGoalsid($event)"&ndash;&gt;
+         (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event"
+           (showGoalid)="setGoalsid($event)"
 
 ></app-goals>-->
-<app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal"
-          [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone" [goalid]="goalid"></app-todo>
 
 <app-annual-review [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="selectedId" ></app-annual-review>

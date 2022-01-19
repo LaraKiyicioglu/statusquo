@@ -10,57 +10,35 @@ import {TeamviewComponent} from "./teamview/teamview.component";
 import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
-
-
   {
     path: 'ziele',
     component: GoalsCreateComponent,
     canActivate: [AuthGuardService]
-
   },
   {
     path: 'notfound',
     component: NotFoundComponent,
     canActivate: [AuthGuardService]
-
-  },
-
-  {
-    path: '',
-    component: GoalsCreateComponent,
-    canActivate: [AuthGuardService]
   },
   {
     path: 'teamview/:id',
     component: TeamviewComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService, RoleGuard]
   },
   {
     path: 'protokolle',
     component: AnnualReviewComponent,
     canActivate: [AuthGuardService]
-
-
   },
-
   {
     path: 'board/:id',
     component: BoardMemberComponent,
     canActivate: [AuthGuardService, RoleGuard]
-
-
-
   },
   {
     path: 'login',
     component: LoginComponent,
-
-
-
-
   }
-
-
 ];
 
 @NgModule({

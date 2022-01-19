@@ -1,30 +1,60 @@
-.goalsCard {
-  height: 80%;
-  box-shadow: none;
-  font-family: "Klavika", sans-serif;
-  color: #0071B9;
-  margin: 1%;
+@media screen and (max-width: 1079px) {
+  .goalsCard {
+    height: 100%;
+    box-shadow: none;
+    font-family: "Klavika", sans-serif;
+    color: #0071B9;
+    margin: 1%;
+  }
+
+  .goalsCard-desktop {
+    display: none;
+  }
 }
+
+
+@media screen and (min-width: 1080px) {
+  .goalsCard {
+    display: none;
+  }
+
+  .goalsCard-desktop {
+    height: 100%;
+    width: 100%;
+    box-shadow: none;
+    font-family: "Klavika", sans-serif;
+    color: #0071B9;
+    margin: 1%;
+  }
+}
+
 
 .inner-cardGoals {
   height: 80%;
-  background-color: #E8E4E1;
+  background-color: transparent;
   margin: 0 auto;
+  padding: 0%;
   position: relative;
   overflow: hidden;
+  box-shadow: none;
 }
 
 .greyGoalsCard {
-  height: 15%;
-  background-color: white;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  background-color: #E8E4E1 !important;
   color: #857971;
-  margin: 0 10% 5px auto;
+  margin-bottom: 2%;
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 4%;
 }
 
-.content {
-  height: 100%;
-  position: center;
-  overflow: auto;
+.icon-desktop {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
@@ -124,4 +154,8 @@ input:focus {
   margin: 0;
   padding: 0;
   box-shadow: none;
+}
+
+.main-div {
+  height: 100%;
 }

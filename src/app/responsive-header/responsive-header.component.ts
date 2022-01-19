@@ -32,14 +32,8 @@ export class ResponsiveHeaderComponent {
   goalid: string = "";
   @Output() idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
-  tasksToTodo: Tasks[] = [];
   tasksToDoing: Tasks[] = [];
   tasksToDone: Tasks[] = [];
-  goalsToOneUser: Goals[] = [];
-  reviewsToOneUser: Review[] = [];
-
-
-  currentUrl: String = ''
   panelOpenState = false;
 
 
@@ -66,14 +60,6 @@ export class ResponsiveHeaderComponent {
     });
 
 
-    if(window.location.href != 'http://localhost:4200/'){
-      this.currentUrl = window.location.href;
-
-    }
-
-    else{
-      this.currentUrl='';
-    }
 
   }
 
@@ -86,14 +72,11 @@ export class ResponsiveHeaderComponent {
   }
 
   goToGoals(userid: any, selectedRole: any): void {
-    this.router.navigate([''], {state: {data: {userid, selectedRole}}});
+    this.router.navigate(['/ziele'], {state: {data: {userid, selectedRole}}});
   }
 
 
-
-
   ngOnInit(): void {
-      this.currentUrl = this.router.url;
 
     this.goToGoals(this.idLoggedInUser, 'Mitarbeiter_in');
     this.loginForm = this.formBuilder.group({
@@ -150,7 +133,6 @@ export class ResponsiveHeaderComponent {
   changeRoleToMitarbeiter_in(){
     console.log("geklickt");
     this.selectedRole ="Mitarbeiter_in";
-    this.currentUrl= '';
     this.router.navigate(['/']);
      }
 
@@ -173,42 +155,10 @@ export class ResponsiveHeaderComponent {
 
   reloadPage() {
     this.router.navigate(['/']);
-    this.currentUrl= '';
 
   }
 
   clickProtokoll() {
-    this.currentUrl = window.location.href;
-  }
-
-
-
-
-
-
-  clickLogo() {
-    console.log('Click Logo: ' + this.tasksToTodo);
-  }
-
- /* loadReviews(userid: string) {
-    this.clickedOnMitarbeiter = true;
-    this.api.getReviewsToUser(userid)
-      .subscribe((res: any) => {
-        this.reviewsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.idTeamMember = userid;
-
-
-  }*/
-
-  changeUrl(id:String) {
-    this.currentUrl = 'board';
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['board/',id]));
   }
 
 }

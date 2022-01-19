@@ -1,105 +1,224 @@
-<div cdkDropListGroup>
-  <div
-    cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="tasksToTodo"
-    class="example-list"
-    (cdkDropListDropped)="dropInTodo($event)">
-    <mat-card class="main-card">TODO
-      <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
+<div class="todo-mobile">
+  <div cdkDropListGroup>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="tasksToTodo"
+      class="example-list"
+      (cdkDropListDropped)="dropInTodo($event)">
+      <mat-card class="main-card">TODO
+        <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
 
- <!--     <mat-card class="inner-card" *ngFor="let task of tasksToTodo"  >
-        <mat-card class="small-card" *ngIf="!editable  || (editableId != task._id)" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+   <!--     <mat-card class="inner-card" *ngFor="let task of tasksToTodo"  >
+          <mat-card class="small-card" *ngIf="!editable  || (editableId != task._id)" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
 
-          {{ task.description }}-->
+            {{ task.description }}-->
 
-      <mat-card class="inner-card">
-        <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag>
-          <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
-                 ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
-                 name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
-          <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
-          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon (click)="deleteDialog(task._id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel
-            </mat-icon>
-          </button>
+        <mat-card class="inner-card">
+          <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag>
+            <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                   ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
+                   name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
+            <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon (click)="deleteDialog(task._id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel
+              </mat-icon>
+            </button>
+          </mat-card>
+        </mat-card>
+        <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
+          <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
+
+            <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                   (keyup.enter)="updateATask(task)">
+          </mat-card>
         </mat-card>
       </mat-card>
-      <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
-        <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
+    </div>
 
-          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
-                 (keyup.enter)="updateATask(task)">
+
+
+    <div
+      cdkDropList
+      #doingList="cdkDropList"
+      [cdkDropListData]="tasksToDoing"
+      class="example-list"
+      (cdkDropListDropped)="dropInDoing($event)">
+      <mat-card class="main-card">DOING
+
+   <!--     <mat-card class="inner-card" *ngIf="!editable" >
+          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+            {{task.description}}-->
+
+        <mat-card class="inner-card">
+          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
+            <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                   ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
+                   name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
+
+            <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
+
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+            </button>
+          </mat-card>
+        </mat-card>
+
+
+  <!--      <mat-card class="inner-card" *ngIf="editable">
+          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}">
+            <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                   (keyup.enter)="updateATask(task)">
+          </mat-card>
+        </mat-card>-->
+
+      </mat-card>
+    </div>
+
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="tasksToDone"
+      class="example-list"
+      (cdkDropListDropped)="dropInDone($event)">
+      <mat-card class="main-card">DONE
+  <!--<<<<<<< HEAD
+        <mat-card class="inner-card" *ngIf="!editable">
+          <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+            {{task.description}}
+  =======-->
+        <mat-card class="inner-card">
+          <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
+            <input  *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                   ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
+                   name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
+
+            <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
+
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" class="icon-styling">cancel</mat-icon>
+            </button>
+          </mat-card>
         </mat-card>
       </mat-card>
-    </mat-card>
-  </div>
-
-
-
-  <div
-    cdkDropList
-    #doingList="cdkDropList"
-    [cdkDropListData]="tasksToDoing"
-    class="example-list"
-    (cdkDropListDropped)="dropInDoing($event)">
-    <mat-card class="main-card">DOING
-
- <!--     <mat-card class="inner-card" *ngIf="!editable" >
-        <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
-          {{task.description}}-->
-
-      <mat-card class="inner-card">
-        <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
-          <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
-                 ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
-                 name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
-
-          <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
-
-          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
-          </button>
-        </mat-card>
-      </mat-card>
-
-
-<!--      <mat-card class="inner-card" *ngIf="editable">
-        <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}">
-          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
-                 (keyup.enter)="updateATask(task)">
-        </mat-card>
-      </mat-card>-->
-
-    </mat-card>
-  </div>
-
-
-  <div
-    cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="tasksToDone"
-    class="example-list"
-    (cdkDropListDropped)="dropInDone($event)">
-    <mat-card class="main-card">DONE
-<!--<<<<<<< HEAD
-      <mat-card class="inner-card" *ngIf="!editable">
-        <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
-          {{task.description}}
-=======-->
-      <mat-card class="inner-card">
-        <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
-          <input  *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
-                 ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
-                 name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
-
-          <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
-
-          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" class="icon-styling">cancel</mat-icon>
-          </button>
-        </mat-card>
-      </mat-card>
-    </mat-card>
+    </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+<!--
+&lt;!&ndash;Desktop&ndash;&gt;
+<div class="todo-desktop">
+
+  <mat-grid-list cols="3" rowHeight="100%" cdkDropListGroup>
+      <mat-grid-tile [colspan]="1"
+                     cdkDropList
+                     #todoList="cdkDropList"
+                     [cdkDropListData]="tasksToTodo"
+                     class="example-list"
+                     (cdkDropListDropped)="dropInTodo($event)">
+          <mat-card class="main-card">TODO
+            <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
+
+            &lt;!&ndash;     <mat-card class="inner-card" *ngFor="let task of tasksToTodo"  >
+                   <mat-card class="small-card" *ngIf="!editable  || (editableId != task._id)" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+
+                     {{ task.description }}&ndash;&gt;
+
+            <mat-card class="inner-card">
+              <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag>
+                <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                       ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
+                       name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
+                <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
+                <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+                  <mat-icon (click)="deleteDialog(task._id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel
+                  </mat-icon>
+                </button>
+              </mat-card>
+            </mat-card>
+            <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
+              <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
+
+                <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                       (keyup.enter)="updateATask(task)">
+              </mat-card>
+            </mat-card>
+          </mat-card>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile [colspan]="1"
+                     cdkDropList
+                     #doingList="cdkDropList"
+                     [cdkDropListData]="tasksToDoing"
+                     class="example-list"
+                     (cdkDropListDropped)="dropInDoing($event)">
+          <mat-card class="main-card">DOING
+
+            &lt;!&ndash;     <mat-card class="inner-card" *ngIf="!editable" >
+                   <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+                     {{task.description}}&ndash;&gt;
+
+            <mat-card class="inner-card">
+              <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
+                <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                       ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
+                       name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
+
+                <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
+
+                <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+                  <mat-icon class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+                </button>
+              </mat-card>
+            </mat-card>
+
+
+            &lt;!&ndash;      <mat-card class="inner-card" *ngIf="editable">
+                    <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}">
+                      <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                             (keyup.enter)="updateATask(task)">
+                    </mat-card>
+                  </mat-card>&ndash;&gt;
+
+          </mat-card>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile [colspan]="1"
+                     cdkDropList
+                     #doneList="cdkDropList"
+                     [cdkDropListData]="tasksToDone"
+                     class="example-list"
+                     (cdkDropListDropped)="dropInDone($event)">
+          <mat-card class="main-card">DONE
+            &lt;!&ndash;<<<<<<< HEAD
+                  <mat-card class="inner-card" *ngIf="!editable">
+                    <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+                      {{task.description}}
+            =======&ndash;&gt;
+            <mat-card class="inner-card">
+              <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
+                <input  *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                        ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
+                        name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
+
+                <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
+
+                <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+                  <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" class="icon-styling">cancel</mat-icon>
+                </button>
+              </mat-card>
+            </mat-card>
+          </mat-card>
+      </mat-grid-tile>
+  </mat-grid-list>
+</div>-->

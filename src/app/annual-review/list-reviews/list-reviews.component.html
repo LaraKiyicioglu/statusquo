@@ -1,7 +1,7 @@
 
 <mat-accordion multi="true" *ngIf="reviewsToOneUser.length > 0">
   <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
-    <mat-expansion-panel *ngFor="let review of reviewsToOneUser" hideToggle>
+    <mat-expansion-panel *ngFor="let review of reviewsToOneUser.reverse()" hideToggle>
       <mat-expansion-panel-header>
         {{ review.date }}
       </mat-expansion-panel-header>

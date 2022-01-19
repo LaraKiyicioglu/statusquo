@@ -1,3 +1,25 @@
+
+@media screen and (min-width: 1080px) {
+  .todo-mobile {
+    display: none;
+  }
+
+  .todo-desktop {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 1079px) {
+  .todo-mobile {
+    display: block;
+  }
+
+  .todo-desktop {
+    display: none;
+  }
+}
+
+
 .main-card {
   margin: 1%;
   box-shadow: 0 0 8px #E8E4E1;

@@ -1,31 +1,36 @@
 <mat-sidenav-container class="sidenav-container">
+
+<!--  SIDENAV-->
   <mat-sidenav #drawer class="sidenav"
                fixedInViewport
                [attr.role]="(isHandset$) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
+              >
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
       <a (click)="drawer.toggle()" mat-list-item *ngIf="this.isLogin">
         <div class="sidenav-text" *ngIf="this.isLogin" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">ZIELE</div>
       </a>
-      <a (click)="drawer.toggle()" mat-list-item *ngIf="this.isLogin" [routerLink]="'/protokolle'">
+      <a (click)="drawer.toggle()" mat-list-item *ngIf="this.isLogin" [routerLink]="'/protokolle'" >
         <div class="sidenav-text" mat-button>PROTOKOLLE</div>
       </a>
 
-      <mat-expansion-panel *ngIf="this.roleLoggedInUser== 'Vorgesetzte_r'" (opened)="panelOpenState = true"
+      <mat-expansion-panel class="expansion-panel-styling" *ngIf="this.roleLoggedInUser== 'Vorgesetzte_r'" (opened)="panelOpenState = true"
                            (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
-          <mat-panel-title>
+          <mat-panel-title class="expansion-panel-title-styling">
             <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
               <div class="sidenav-text">MEIN TEAM</div>
             </a>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngFor="let member of teamVorgesetze">
-          <a (click)="drawer.toggle()" (click)="changeUrl(member.userid)"  (click)="goToTeamview(member.userid, 'Vorgesetzte_r')"> {{member.firstname}}
+
+        <div class="expansion-panel-member-styling" *ngFor="let member of teamVorgesetze">
+          <a mat-list-item (click)="goToTeamview(member.userid, 'Vorgesetzte_r')">
+            {{member.firstname}} {{ member.surname}}
           </a>
         </div>
+
       </mat-expansion-panel>
       <a (click)="drawer.toggle()" (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
@@ -33,21 +38,26 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
+
+
+
+
+<!--  TOOLBAR-->
   <mat-toolbar color="white">
     <button
+      class="icon-styling"
       type="button"
       aria-label="Toggle sidenav"
       mat-icon-button
-      (click)="drawer.toggle()"
-      *ngIf="isHandset$ | async">
+      (click)="drawer.toggle()">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <span class="title" (click)="clickLogo()">adesso</span>
+    <span class="title">adesso</span>
     <div class="nav-element" (click)="changeRoleToMitarbeiter_in()">
       <div  class="element-text"  *ngIf="this.isLogin">ZIELE</div>
     </div>
     <div class="nav-element "  (click)="clickProtokoll()">
-      <div class="element-text" routerLink="protokolle" *ngIf="this.isLogin">PROTOKOLLE</div>
+      <div class="element-text" [routerLink]="'/protokolle'"  *ngIf="this.isLogin">PROTOKOLLE</div>
     </div>
     <div class="nav-element"  (click)="reloadPage() " (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
       <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">MEIN TEAM
@@ -69,5 +79,9 @@
       </div>
     </div>
   </mat-toolbar>
+
+
+
+<!--  CONTENT-->
     <router-outlet class="router-outlet-styling"></router-outlet>
 </mat-sidenav-container>
