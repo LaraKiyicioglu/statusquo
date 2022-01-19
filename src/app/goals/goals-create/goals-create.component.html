@@ -1,4 +1,4 @@
-<mat-card class="goalsCard">ZIELE
+<mat-card class="goalsCard">Ziele
   <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="onAddPost(idloggedInUser)">add</mat-icon>
 
   <cdk-accordion class="example-accordion"
@@ -24,7 +24,7 @@
         <mat-card class="goals-matcard" *ngIf="selectedRole != 'Mitarbeiter_in'">{{goal.description}}</mat-card>
         <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
                ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals"
-               name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
+               name="desc" (keyup)="getTheInput($event)" aria-label="edit" (keyup)="updateAGoal(goal)">
         <span class="example-accordion-item-description">
           <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
       </span>

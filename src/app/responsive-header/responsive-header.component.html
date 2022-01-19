@@ -33,11 +33,13 @@
 
 
 =======-->
+      <a mat-list-item *ngIf="this.isLogin">{{firstNameloggedInUser + ' ' + lastNameloggedInUser}}</a>
       <a mat-list-item *ngIf="this.isLogin">
-        <div class="sidenav-text" *ngIf="this.isLogin" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">ZIELE</div>
+
+        <div class="sidenav-text" *ngIf="this.isLogin" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">Ziele</div>
       </a>
       <a mat-list-item *ngIf="this.isLogin" [routerLink]="'/protokolle'">
-        <div class="sidenav-text" mat-button>PROTOKOLLE</div>
+        <div class="sidenav-text" mat-button>Protokolle</div>
       </a>
     <!--  <div>
         <a mat-list-item (click)="onSelectVorgesetzte_r()" (click)="reloadPage()" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
@@ -49,12 +51,13 @@
         </a>
       </div>-->
 
+
       <mat-expansion-panel *ngIf="this.roleLoggedInUser== 'Vorgesetzte_r'" (opened)="panelOpenState = true"
                            (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
-              <div class="sidenav-text">MEIN TEAM</div>
+              <div class="sidenav-text">Mein Team</div>
             </a>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -76,17 +79,17 @@
       mat-icon-button
       (click)="drawer.toggle()"
       *ngIf="isHandset$ | async">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <mat-icon aria-label="Side nav toggle icon">Menü</mat-icon>
     </button>
     <span class="title" (click)="clickLogo()">adesso</span>
     <div class="nav-element" (click)="changeRoleToMitarbeiter_in()">
-      <div  class="element-text"  *ngIf="this.isLogin">ZIELE</div>
+      <div  class="element-text"  *ngIf="this.isLogin">Ziele</div>
     </div>
     <div class="nav-element "  (click)="clickProtokoll()">
-      <div class="element-text" routerLink="protokolle" *ngIf="this.isLogin">PROTOKOLLE</div>
+      <div class="element-text" routerLink="protokolle" *ngIf="this.isLogin">Protokolle</div>
     </div>
     <div class="nav-element"  (click)="reloadPage() " (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
-      <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">MEIN TEAM
+      <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">Mein Team
       </div>
     </div>
     <span class="example-spacer"></span>

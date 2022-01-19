@@ -1,5 +1,5 @@
 
-<mat-card class="row style">UNTERJAEHRIGER AUSTAUSCH
+<mat-card class="row style">Unterjähriger Austausch
   <mat-icon (click)="addPostForm()">add</mat-icon>
   <mat-card class="style2 col-md-6" >
     <mat-expansion-panel hideToggle *ngIf = "addPost">
@@ -23,20 +23,21 @@
           matInput rows="6"
           name="content"
           required
-          placeholder="Notizen zum unterjaehrigen Austausch"
+          placeholder="Notizen zum unterjährigen Austausch"
           #content="ngModel">
         </textarea>
-  <mat-error *ngIf="content.invalid">Notizen eingeben</mat-error>
-</mat-form-field>
+        <mat-error *ngIf="content.invalid">Notizen eingeben</mat-error>
+      </mat-form-field>
       <mat-action-row>
         <button
 
-      mat-raised-button *ngIf=true matSuffix
-      type="submit" (click)=onAddPost(idloggedInUser)>Save
-    </button>
+          mat-raised-button *ngIf=true matSuffix
+          type="submit" (click)=onAddPost(idloggedInUser)>Speichern
+        </button>
       </mat-action-row>
     </mat-expansion-panel>
     <app-list-reviews [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember" [currentUrl]="currentUrl"></app-list-reviews>
 
 
+  </mat-card>
 </mat-card>

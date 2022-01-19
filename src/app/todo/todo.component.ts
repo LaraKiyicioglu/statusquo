@@ -143,7 +143,7 @@ export class TodoComponent implements OnInit {
   addTask() {
     this.isLoadingResults = true;
     const simpleObject = {} as Tasks;
-    simpleObject.description = "Click to edit";
+    simpleObject.description = "Benenne deine Task";
     simpleObject.status = "todo";
     simpleObject.goalid = this.goalid;
 

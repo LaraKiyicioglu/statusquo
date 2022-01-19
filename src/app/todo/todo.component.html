@@ -5,13 +5,13 @@
     [cdkDropListData]="tasksToTodo"
     class="example-list"
     (cdkDropListDropped)="dropInTodo($event)">
-    <mat-card class="main-card">TODO
+    <mat-card class="main-card">To Do
       <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
 
- <!--     <mat-card class="inner-card" *ngFor="let task of tasksToTodo"  >
-        <mat-card class="small-card" *ngIf="!editable  || (editableId != task._id)" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+      <!--     <mat-card class="inner-card" *ngFor="let task of tasksToTodo"  >
+             <mat-card class="small-card" *ngIf="!editable  || (editableId != task._id)" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
 
-          {{ task.description }}-->
+               {{ task.description }}-->
 
       <mat-card class="inner-card">
         <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag>
@@ -43,11 +43,11 @@
     [cdkDropListData]="tasksToDoing"
     class="example-list"
     (cdkDropListDropped)="dropInDoing($event)">
-    <mat-card class="main-card">DOING
+    <mat-card class="main-card">Doing
 
- <!--     <mat-card class="inner-card" *ngIf="!editable" >
-        <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
-          {{task.description}}-->
+      <!--     <mat-card class="inner-card" *ngIf="!editable" >
+             <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+               {{task.description}}-->
 
       <mat-card class="inner-card">
         <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
@@ -64,12 +64,12 @@
       </mat-card>
 
 
-<!--      <mat-card class="inner-card" *ngIf="editable">
-        <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}">
-          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
-                 (keyup.enter)="updateATask(task)">
-        </mat-card>
-      </mat-card>-->
+      <!--      <mat-card class="inner-card" *ngIf="editable">
+              <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}">
+                <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                       (keyup.enter)="updateATask(task)">
+              </mat-card>
+            </mat-card>-->
 
     </mat-card>
   </div>
@@ -81,17 +81,17 @@
     [cdkDropListData]="tasksToDone"
     class="example-list"
     (cdkDropListDropped)="dropInDone($event)">
-    <mat-card class="main-card">DONE
-<!--<<<<<<< HEAD
-      <mat-card class="inner-card" *ngIf="!editable">
-        <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
-          {{task.description}}
-=======-->
+    <mat-card class="main-card">Done
+      <!--<<<<<<< HEAD
+            <mat-card class="inner-card" *ngIf="!editable">
+              <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+                {{task.description}}
+      =======-->
       <mat-card class="inner-card">
         <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
           <input  *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
-                 ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
-                 name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
+                  ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
+                  name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
 
           <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
 

@@ -1,20 +1,20 @@
-<h1>The goal you want to update:</h1>
+<h1>Das Ziel, das Sie aktualisieren möchten:</h1>
 <h2>"{{oldDescription}}"</h2>
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
     <mat-form-field appearance="fill">
-      <mat-label>your updated goal</mat-label>
-      <input [(ngModel)]="enteredValue" matInput placeholder="I want to achieve.." formControlName="description"
+      <mat-label>Ziel aktualisiert</mat-label>
+      <input [(ngModel)]="enteredValue" matInput placeholder="Ich möchte erreichen.." formControlName="description"
              value="">
       <mat-error>
-        <span>Please enter description</span>
+        <span>Beschreibung ändern</span>
       </mat-error>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
   <form [formGroup]="articleForm">
-    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="onNoClick()">delete</button>
     <button (keyup.enter)="onFormSubmit()" (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid"
             mat-flat-button color="primary">
       <mat-icon>save</mat-icon>

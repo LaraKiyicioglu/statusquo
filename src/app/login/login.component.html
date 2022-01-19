@@ -1,7 +1,7 @@
 <div class='row style' *ngIf='!this.isLogin'>
   <h3 class="headline">LOGIN</h3>
   <mat-error *ngIf="loginInvalid">
-    The username and password were not recognized
+    Diese Benutzer-ID oder dieses Kennwort wird nicht erkannt.
   </mat-error>
   <form class="style2 col-lg" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class='form-group'>
@@ -9,7 +9,7 @@
              type="text" formControlName="username" name="username" placeholder="Username"
              [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
       <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors">Username is required</div>
+        <div *ngIf="f.username.errors">Die Eingabe des Benutzername ist notwendig.</div>
       </div>
     </div>
     <div class='form-group'>
@@ -17,7 +17,7 @@
              type="password" formControlName="password" name="password" placeholder="Password"
              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors">Password is required</div>
+        <div *ngIf="f.password.errors">Die Eingabe des Passworts ist notwendig.</div>
       </div>
     </div>
     <div align="center">
