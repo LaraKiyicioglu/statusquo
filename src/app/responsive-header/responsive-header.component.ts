@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Output} from '@angular/core';
+import {Component, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
@@ -8,8 +8,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Login, Team} from "../shared/login";
 import {ApiService} from "../services/api.service";
 import {Tasks} from "../shared/tasks";
-import {Goals} from "../shared/goals";
-import {Review} from "../shared/review";
+
 
 @Component({
   selector: 'app-responsive-header',
@@ -35,40 +34,32 @@ export class ResponsiveHeaderComponent {
   tasksToDoing: Tasks[] = [];
   tasksToDone: Tasks[] = [];
   panelOpenState = false;
-
-
-
-
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
 
+
   constructor(private breakpointObserver: BreakpointObserver,
               private auth: AuthService,
               private router: Router,
               private formBuilder: FormBuilder,
               private api: ApiService,
-              private cdr: ChangeDetectorRef
 
   ) {
 
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
-
-
-
   }
 
   setLoggedIn(data: boolean) {
     this.loggedIn = data;
   }
 
-  goToTeamview(userid: any, selectedRole: any): void {
-    this.router.navigate(['/teamview/' + userid], {state: {data: {userid, selectedRole}}});
+  goToTeamview(userid: any, selectedRole: any, surname: any, firstname: any): void {
+    this.router.navigate(['/teamview/' + userid], {state: {data: {userid, selectedRole, surname, firstname}}});
   }
 
   goToGoals(userid: any, selectedRole: any): void {
@@ -77,8 +68,6 @@ export class ResponsiveHeaderComponent {
 
 
   ngOnInit(): void {
-
-    this.goToGoals(this.idLoggedInUser, 'Mitarbeiter_in');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

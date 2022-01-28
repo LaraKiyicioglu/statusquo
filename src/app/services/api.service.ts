@@ -135,6 +135,14 @@ export class ApiService {
     );
   }
 
+  getTask(id: number): Observable<Tasks> {
+    const url = `${apiUrlTasks}/${id}`;
+    return this.http.get<Tasks>(url).pipe(
+      tap(_ => console.log(`fetched task id=${id}`)),
+      catchError(this.handleError<Tasks>(`getArticle id=${id}`))
+    );
+  }
+
   getTasksToGoal(id: any): Observable<Tasks[]> {
     return this.http.get<Tasks[]>(`${apiUrlTasksForGoal}/${id}`)
       .pipe(

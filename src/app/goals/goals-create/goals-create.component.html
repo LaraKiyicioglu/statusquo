@@ -20,15 +20,26 @@
       (click)="setTheSelectedGoal(goal)"
       (click)="showTasks(goal._id)"
       (click)="setGoalsid(goal._id)">
+
       <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-        <mat-card class="goals-matcard" *ngIf="selectedRole != 'Mitarbeiter_in'">{{goal.description}}</mat-card>
-        <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
-               ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals"
-               name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
+
+        <mat-card class="goals-matcard">
+          {{goal.description}}
+        </mat-card>
+
+
         <span class="example-accordion-item-description">
-          <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+           <mat-icon (click)="openDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
+             edit
+           </mat-icon>
+
+          <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
+            cancel
+          </mat-icon>
         </span>
+
       </div>
+
       <div
         class="example-accordion-item-body"
         role="region"
@@ -38,6 +49,7 @@
         <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
                   [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"></app-todo>
       </div>
+
     </cdk-accordion-item>
   </cdk-accordion>
 </mat-card>
@@ -49,7 +61,7 @@
 
 
 <!--DESKTOP-->
-<div class="main-div">
+<div class="main-div-desktop">
   <mat-grid-list cols="5" rowHeight="100%">
     <mat-grid-tile [colspan]="2">
       <mat-card class="goalsCard-desktop">ZIELE

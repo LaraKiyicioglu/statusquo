@@ -5,6 +5,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
+import {GoalsEditComponent} from "../goals/goals-edit/goals-edit.component";
+import {TodoEditComponent} from "./todo-edit/todo-edit.component";
 
 @Component({
   selector: 'app-todo',
@@ -20,13 +22,14 @@ export class TodoComponent implements OnInit {
   @Input() goalid: string = '';
   @Input() selectedRole: String = "Mitarbeiter_in";
 
+  descriptionDialog: String = "";
+  idDialog: String = "";
   task: Tasks = {goalid: '', _id: '', description: '', status: ''};
   description = '';
   isLoadingResults = true;
   status = '';
   editable = false;
   showData: boolean = false;
-  isSingleClick: Boolean = true;
   editableId: String = '';
 
 
@@ -34,7 +37,19 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.selectedRole);
+  }
 
+  openDialog(id: any, description: any): void {
+    this.descriptionDialog = description;
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(TodoEditComponent, {
+      width: '40%',
+      data: {'id': this.idDialog, 'description': this.descriptionDialog}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
   }
 
 
@@ -173,44 +188,6 @@ export class TodoComponent implements OnInit {
       this.editable = true;
     }
   }
-
-  getTheInput(e: any) {
-    this.description = e.target.value;
-  }
-
-  updateATask(task: Tasks) {
-    this.isLoadingResults = true;
-    task.description = this.description;
-    this.api.updateTask(task._id, task)
-      .subscribe((res: any) => {
-          this.isLoadingResults = false;
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
-    this.editable = false;
-  }
-
-  method1CallForClick(){
-    this.isSingleClick = true;
-    setTimeout(()=>{
-      if(this.isSingleClick){
-      }
-    },250)
-  }
-  method2CallForDblClick(id : String){
-    this.isSingleClick = false;
-    this.editableId = id;
-    this.changeEditable();
-  }
-
-
-  isVorgesetzte_r() : boolean{
-
-    return (this.selectedRole == 'Vorgesetzte_r');
-
-}
 
 
 }

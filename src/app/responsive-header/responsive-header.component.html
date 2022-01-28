@@ -26,7 +26,7 @@
         </mat-expansion-panel-header>
 
         <div class="expansion-panel-member-styling" *ngFor="let member of teamVorgesetze">
-          <a mat-list-item (click)="goToTeamview(member.userid, 'Vorgesetzte_r')">
+          <a mat-list-item (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.surname, member.firstname)">
             {{member.firstname}} {{ member.surname}}
           </a>
         </div>
@@ -52,9 +52,9 @@
       (click)="drawer.toggle()">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <span class="title">adesso</span>
+    <span [routerLink]="''"  class="title">adesso</span>
     <div class="nav-element" (click)="changeRoleToMitarbeiter_in()">
-      <div  class="element-text"  *ngIf="this.isLogin">ZIELE</div>
+      <div  class="element-text">ZIELE</div>
     </div>
     <div class="nav-element "  (click)="clickProtokoll()">
       <div class="element-text" [routerLink]="'/protokolle'"  *ngIf="this.isLogin">PROTOKOLLE</div>

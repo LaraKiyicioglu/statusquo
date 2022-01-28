@@ -8,8 +8,14 @@ import {RoleGuard} from "./role.guard";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {TeamviewComponent} from "./teamview/teamview.component";
 import {LoginComponent} from "./login/login.component";
+import {HelloComponent} from "./hello/hello.component";
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HelloComponent,
+    canActivate: [AuthGuardService]
+  },
   {
     path: 'ziele',
     component: GoalsCreateComponent,

@@ -1,8 +1,9 @@
-<mat-tab-group>
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
   <mat-tab label="ZIELE">
     <app-goals [selectedRole]="selectedRole" [idMember]="idMember" [goalsToOneUser]="goalsToOneUser"></app-goals>
     </mat-tab>
   <mat-tab label="PROTOKOLLE">
     <app-annual-review [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idMember"></app-annual-review>
   </mat-tab>
+  <mat-tab class="name-styling" [disabled]="true" [label]="this.firstname + ' ' + this.surname"></mat-tab>
 </mat-tab-group>
